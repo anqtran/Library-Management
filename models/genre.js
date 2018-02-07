@@ -4,23 +4,23 @@ var Schema = mongoose.Schema;
 
 var genre = new Schema(
   {
-    genre_name: {type: String, required: true, min:100, max: 100},
+    genre_name: {type: String, max: 100},
   }
 );
 
 // Virtual for author's full name
-AuthorSchema
+genre
 .virtual('name')
 .get(function () {
   return this.genre_name;
 });
 
 // Virtual for author's URL
-AuthorSchema
+genre
 .virtual('url')
 .get(function () {
-  return '/catalog/author/' + this._id;
+  return '/catalog/genre/' + this._id;
 });
 
 //Export model
-module.exports = mongoose.model('Author', AuthorSchema);
+module.exports = mongoose.model('Genre', genre);
